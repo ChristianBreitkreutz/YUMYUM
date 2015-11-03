@@ -1,0 +1,5 @@
+gitHubUserName: ChrBrAtePages
+commiterMail: cbreitkreutz@epages.com
+commiterName: Christian Breitkreutz
+gitHubPassword: "{{vault_git_GitHubPassword}}"
+publicKeyNameOnGitHub: "ansible_generated_key_{{ansible_hostname}}"

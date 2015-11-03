@@ -1,0 +1,3 @@
+# how to install tuetensuppe
+  - init.sh (with su)
+  - ansible-playbook -i inventory.ini letsGoBaby.yml --ask-sudo-pass --ask-vault-pass
