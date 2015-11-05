@@ -16,20 +16,20 @@
   changed_when: false
 
 - name: setup git user
-  command: git config --global user.name "{{commiterName}}" #"
-  changed_when: not allCurrentSettings.stdout | search("user.name={{commiterName}}") #"
+  command: git config --global user.name "{{git_commiterName}}" #"
+  when: not allCurrentSettings.stdout | search("user.name={{git_commiterName}}") #"
 
 - name: setup git mail
-  command: git config --global user.email "{{commiterMail}}" #"
-  changed_when: not allCurrentSettings.stdout | search("user.email={{commiterMail}}") #"
+  command: git config --global user.email "{{git_commiterMail}}" #"
+  when: not allCurrentSettings.stdout | search("user.email={{git_commiterMail}}") #"
 
 - name: set push default to matching
   command: git config --global push.default matching
-  changed_when: not allCurrentSettings.stdout | search("push.default=matching") #"
+  when: not allCurrentSettings.stdout | search("push.default=matching") #"
 
 - name: set editor to vim
   command: git config --global core.editor vim
-  changed_when: not allCurrentSettings.stdout | search("core.editor=vim") #"
+  when: not allCurrentSettings.stdout | search("core.editor=vim") #"
 
 # connect git to github
 - name: create ssh folder
@@ -52,9 +52,9 @@
   uri:
     url: https://api.github.com/user/keys
     method: POST
-    user: "{{gitHubUserName}}"
-    password: "{{gitHubPassword}}"
-    body: "{\"title\":\"{{publicKeyNameOnGitHub}}\",\"key\":\"{{publickey.stdout}}\", \"_hack\": null}" #_hack it is because of a bug in the uri package
+    user: "{{git_gitHubUserName}}"
+    password: "{{git_gitHubPassword}}"
+    body: "{\"title\":\"ansible_generated_key_{{ansible_hostname}}\",\"key\":\"{{publickey.stdout}}\", \"_hack\": null}" #_hack it is because of a bug in the uri package
     force_basic_auth: yes
     body_format: json
     status_code: 201, 422 #201 - set key, 422 - key is already in use
