@@ -4,3 +4,23 @@
   roles:
     - common
     - git
+
+  vars_prompt:
+    - name: "git_gitHubUserName"
+      prompt: "GitHub username"
+      default: "ChrBrAtePages"
+      private: no
+
+    - name: "git_commiterName"
+      prompt: "GitHub commiterName"
+      default: "Christian Breitkreutz"
+      private: no
+
+    - name: "git_commiterMail"
+      prompt: "GitHub commiterMail"
+      default: "cbreitkreutz@epages.com"
+      private: no
+
+    - name: "git_gitHubPassword"
+      prompt: "GitHub password"
+      private: no
