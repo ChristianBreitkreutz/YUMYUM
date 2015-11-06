@@ -9,3 +9,7 @@
 - name: install wget
   yum:
     name=wget
+
+- name: install vim
+  yum:
+    name=vim

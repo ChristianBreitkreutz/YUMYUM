@@ -2,8 +2,9 @@
 - hosts: local
 
   roles:
-    #- common
+    - common
     - git
+    - bashrc
 
   vars_prompt:
     - name: "git_gitHubUserName"
@@ -23,4 +24,4 @@
 
     - name: "git_gitHubPassword"
       prompt: "GitHub password"
-      private: no
+      private: yes

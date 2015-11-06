@@ -3,13 +3,9 @@
   yum:
     name=git
 
-- name: install vim
-  yum:
-    name=vim
-
-# setup git
-- name: create ssh folder
-  file: path=~/.gitconfig state=file
+# setup
+- name: pre create .gitconfig file
+  command: touch ~/.gitconfig
 
 - name: load all current settings
   shell: git config --global --list
@@ -55,7 +51,7 @@
     method: POST
     user: "{{git_gitHubUserName}}"
     password: "{{git_gitHubPassword}}"
-    body: "{\"title\":\"ansible_generated_key_{{ansible_user_id}}@{{ansible_hostname}}\",\"key\":\"{{publickey.stdout}}\", \"_hack\": null}" #_hack it is because of a bug in the uri package
+    body: "{\"title\":\"ansible_generated_{{ansible_user_id}}@{{ansible_hostname}}\",\"key\":\"{{publickey.stdout}}\", \"_hack\": null}" #_hack it is because of a bug in the uri package
     force_basic_auth: yes
     body_format: json
     status_code: 201, 422 #201 - set key, 422 - key is already in use

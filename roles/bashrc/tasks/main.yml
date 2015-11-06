@@ -4,5 +4,5 @@
   changed_when: false
 
 - name: set export path for Sublime
-  shell: "echo 'echo \"set by ansible\"' >> ~/.bashrc"
-  when: not bashrcContent.stdout | search("set by ansible") #"
+  shell: "echo 'echo \"### welcome with ansible###\"' >> ~/.bashrc"
+  when: not bashrcContent.stdout | search("welcome with ansible") #"
