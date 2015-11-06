@@ -2,7 +2,7 @@
 - hosts: local
 
   roles:
-    #- common
+    - common
     - git
 
   vars_prompt:
