@@ -14,12 +14,12 @@
   changed_when: false
 
 - name: setup git user
-  command: git config --global user.name "{{git_commiterName}}" #"
-  when: not allCurrentSettings.stdout | search("user.name={{git_commiterName}}") #"
+  command: git config --global user.name "{{commiterName}}" #"
+  when: not allCurrentSettings.stdout | search("user.name={{commiterName}}") #"
 
 - name: setup git mail
-  command: git config --global user.email "{{git_commiterMail}}" #"
-  when: not allCurrentSettings.stdout | search("user.email={{git_commiterMail}}") #"
+  command: git config --global user.email "{{commiterMail}}" #"
+  when: not allCurrentSettings.stdout | search("user.email={{commiterMail}}") #"
 
 - name: set push default to matching
   command: git config --global push.default matching
@@ -50,8 +50,8 @@
   uri:
     url: https://api.github.com/user/keys
     method: POST
-    user: "{{git_gitHubUserName}}"
-    password: "{{git_gitHubPassword}}"
+    user: "{{gitHubUserName}}"
+    password: "{{gitHubPassword}}"
     body: "{\"title\":\"ansible_generated_{{ansible_user_id}}@{{ansible_hostname}}\",\"key\":\"{{publickey.stdout}}\", \"_hack\": null}" #_hack it is because of a bug in the uri package
     force_basic_auth: yes
     body_format: json
