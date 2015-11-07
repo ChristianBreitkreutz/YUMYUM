@@ -3,9 +3,9 @@
 - hosts: local
   remote_user: root
   roles:
-    #- common
+    - common
     - bashrc
-    #- git
-    #- grafics
+    - git
+    - grafics
 
 
