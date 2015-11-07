@@ -1,0 +1,9 @@
+- name: install inkscape
+  sudo: yes
+  yum:
+    name=inkscape
+
+- name: install gimp
+  sudo: yes
+  yum:
+    name=gimp

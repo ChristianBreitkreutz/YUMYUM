@@ -1,8 +1,10 @@
 - name: load root .bashrc
+  sudo: yes
   shell: "cat ~/.bashrc"
   register: bashrcContent
   changed_when: false
 
 - name: set export path for Sublime
-  shell: "echo 'echo \"### welcome with ansible###\"' >> ~/.bashrc"
+  sudo: yes
+  shell: "echo 'echo \"### welcome root with ansible###\"' >> ~/.bashrc"
   when: not bashrcContent.stdout | search("welcome with ansible") #"

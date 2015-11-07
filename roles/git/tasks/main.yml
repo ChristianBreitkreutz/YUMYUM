@@ -1,5 +1,6 @@
 # install git
 - name: install git
+  sudo: yes
   yum:
     name=git
 
