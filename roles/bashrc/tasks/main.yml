@@ -1,10 +1,30 @@
 - name: load root .bashrc
   sudo: yes
   shell: "cat ~/.bashrc"
+  register: bashrcContent_root
+  changed_when: false
+
+- name: load .bashrc
+  shell: "cat ~/.bashrc"
   register: bashrcContent
   changed_when: false
 
-- name: set export path for Sublime
+- name: set welcome message (root)
   sudo: yes
-  shell: "echo 'echo \"### welcome root with ansible###\"' >> ~/.bashrc"
-  when: not bashrcContent.stdout | search("welcome with ansible") #"
+  shell: "echo 'echo \"### set via ansible ###\"' >> ~/.bashrc"
+  when: not bashrcContent_root.stdout | search("set via ansible") #"
+
+- name: set welcome message
+  shell: "echo 'echo \"### set via ansible ###\"' >> ~/.bashrc"
+  when: not bashrcContent.stdout | search("set via ansible") #"
+
+- name: set alias la -> ls -la (root)
+  sudo: yes
+  shell: "echo 'alias la=\"ls -la\"' >> ~/.bashrc"
+  when: not bashrcContent_root.stdout | search("alias la=\"ls -la\"") #"
+
+- name: set alias la -> ls -la
+  shell: "echo 'alias la=\"ls -la\"' >> ~/.bashrc"
+  when: not bashrcContent.stdout | search("alias la=\"ls -la\"") #"
+
+
