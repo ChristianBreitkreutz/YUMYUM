@@ -1,11 +1,9 @@
 # how to install YUMYUM on centos
 
-## add user to sudo
-  - `visudo`
-  - `<YourUsername> ALL=(ALL) ALL`
-  - `next to root ALL=(ALL) ALL`
-
-## install ansible
+## call init.sh as root
+it will add the user to the wheel group and install ansible
+`. init.sh <username>`
+  - `usermod -a -G wheel <username>`
   - `yum install epel-release.noarch`
   - `yum install ansible`
 
