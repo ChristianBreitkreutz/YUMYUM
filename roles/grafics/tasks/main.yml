@@ -1,9 +1,7 @@
-- name: install inkscape
+- name: install grafics
   sudo: yes
   yum:
-    name=inkscape
-
-- name: install gimp
-  sudo: yes
-  yum:
-    name=gimp
+    name={{ item }}
+  with_items:
+    - inkscape
+    - gimp

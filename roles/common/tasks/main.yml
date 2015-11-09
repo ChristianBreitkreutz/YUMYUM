@@ -1,19 +1,10 @@
-- name: install curl
+- name: install commons
   sudo: yes
   yum:
-    name=curl
-
-- name: install jwhois
-  sudo: yes
-  yum:
-    name=jwhois
-
-- name: install wget
-  sudo: yes
-  yum:
-    name=wget
-
-- name: install vim
-  sudo: yes
-  yum:
-    name=vim
+    name={{ item }}
+  with_items:
+    - curl
+    - jwhois
+    - vim
+    - dos2unix
+    - tree
