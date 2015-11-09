@@ -8,4 +8,8 @@
     - git
     - grafics
 
+  vars_prompt:
+    - name: "gitHubPassword"
+      prompt: "enter git hub password"
+      private: yes
 

@@ -46,7 +46,7 @@
   register: publickey
   changed_when: false
 
-- name: add public key to github acount
+- name: add public key to github account
   uri:
     url: https://api.github.com/user/keys
     method: POST
