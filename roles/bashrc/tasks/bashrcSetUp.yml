@@ -1,0 +1,23 @@
+- name: Creates ~/.bashloader.d directory
+  file:
+    state: directory
+    path: "{{ UserHome }}/.bashloader.d"
+    mode: 0755
+
+- name: Puts the common in the bashloader.d
+  copy:
+    src: common.sh
+    dest: "{{ UserHome }}/.bashloader.d"
+    mode: 0644
+ 
+- name: add bashload in .bashrc
+  lineinfile:
+    dest: "{{ UserHome }}/.bashrc" 
+    line: "{{ item }}"
+  with_items:
+    - "#auto include for multiple .bashrc files"
+    - for FILE in $( find "$HOME/.bashloader.d" -type f -print | sort )
+    - do
+    - \tsource "$FILE"
+    - done
+

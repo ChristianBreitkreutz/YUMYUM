@@ -1,25 +1,15 @@
-- name: Creates ~/.bashloader.d directory
-  file:
-    state: directory
-    path: "{{ ansible_env['HOME'] }}/.bashloader.d"
-    mode: 0755
+# prepare and set default for user and root
+- include: bashrcSetUp.yml UserHome="{{ ansible_env['HOME'] }}"
+- include: bashrcSetUp.yml UserHome="/root"
+  sudo: yes
 
-- name: Puts the common in the bashloader.d
-  copy:
-    src: common.sh
-    dest: "{{ ansible_env['HOME'] }}/.bashloader.d"
-    mode: 0644
-
-- name: add bashload in .bashrc
-  lineinfile:
-    dest: "{{ ansible_env['HOME'] }}/.bashrc" 
-    line: "{{ item }}"
-  with_items:
-    - "#auto include for multiple .bashrc files"
-    - for FILE in $( find "$HOME/.bashloader.d" -type f -print | sort )
-    - do
-    - \tsource "$FILE"
-    - done
+- name: put root only settings
+  template:
+    src=root.sh.j2 
+    dest=/root/.bashloader.d/root.sh
+    mode=0644
+  sudo: yes
 
 - name: load new .bashrc
   shell: "source $HOME/.bashrc"
+  changed_when: false
