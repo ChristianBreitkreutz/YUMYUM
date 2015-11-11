@@ -1,30 +1,25 @@
-- name: load root .bashrc
-  sudo: yes
-  shell: "cat ~/.bashrc"
-  register: bashrcContent_root
-  changed_when: false
+- name: Creates ~/.bashloader.d directory
+  file:
+    state: directory
+    path: "{{ ansible_env['HOME'] }}/.bashloader.d"
+    mode: 0755
 
-- name: load .bashrc
-  shell: "cat ~/.bashrc"
-  register: bashrcContent
-  changed_when: false
+- name: Puts the common in the bashloader.d
+  copy:
+    src: common.sh
+    dest: "{{ ansible_env['HOME'] }}/.bashloader.d"
+    mode: 0644
 
-- name: set welcome message (root)
-  sudo: yes
-  shell: "echo 'echo \"### set via ansible ###\"' >> ~/.bashrc"
-  when: not bashrcContent_root.stdout | search("set via ansible") #"
+- name: add bashload in .bashrc
+  lineinfile:
+    dest: "{{ ansible_env['HOME'] }}/.bashrc" 
+    line: "{{ item }}"
+  with_items:
+    - "#auto include for multiple .bashrc files"
+    - for FILE in $( find "$HOME/.bashloader.d" -type f -print | sort )
+    - do
+    - \tsource "$FILE"
+    - done
 
-- name: set welcome message
-  shell: "echo 'echo \"### set via ansible ###\"' >> ~/.bashrc"
-  when: not bashrcContent.stdout | search("set via ansible") #"
-
-- name: set alias la -> ls -la (root)
-  sudo: yes
-  shell: "echo 'alias la=\"ls -la\"' >> ~/.bashrc"
-  when: not bashrcContent_root.stdout | search("alias la=\"ls -la\"") #"
-
-- name: set alias la -> ls -la
-  shell: "echo 'alias la=\"ls -la\"' >> ~/.bashrc"
-  when: not bashrcContent.stdout | search("alias la=\"ls -la\"") #"
-
-
+- name: load new .bashrc
+  shell: "source $HOME/.bashrc"
