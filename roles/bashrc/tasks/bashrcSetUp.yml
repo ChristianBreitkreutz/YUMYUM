@@ -17,9 +17,9 @@
 
 - name: extend current .bashrc
   template:
-    src=newBashrc.j2 
-    dest="{{ UserHome }}/.bashrc"
-    mode=0644
+    src: newBashrc.j2 
+    dest: "{{ UserHome }}/.bashrc"
+    mode: 0644
   when: not currentBashrc.stdout | search("AnsibleCopyToken") #"
 
 
