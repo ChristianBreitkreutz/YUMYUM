@@ -1,0 +1,10 @@
+#copy old bash
+"{{currentBashrc.stdout}}"
+
+# AnsibleCopyToken
+# ansible auto include for multiple .bashrc files
+for FILE in $( find "$HOME/.bashloader.d" -type f -print | sort )
+do
+  source "$FILE"
+done
+

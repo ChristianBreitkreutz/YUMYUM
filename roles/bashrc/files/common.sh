@@ -7,5 +7,6 @@ function ag() {
 alias ls='ls --color=auto'
 alias ll='ls -lF'
 alias la='ls -A'
+alias tailf='tail -f -n50'
 
 EDITOR=vim

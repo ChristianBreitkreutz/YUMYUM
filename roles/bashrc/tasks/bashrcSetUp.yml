@@ -9,15 +9,17 @@
     src: common.sh
     dest: "{{ UserHome }}/.bashloader.d"
     mode: 0644
- 
-- name: add bashload in .bashrc
-  lineinfile:
-    dest: "{{ UserHome }}/.bashrc" 
-    line: "{{ item }}"
-  with_items:
-    - "#auto include for multiple .bashrc files"
-    - for FILE in $( find "$HOME/.bashloader.d" -type f -print | sort )
-    - do
-    - \tsource "$FILE"
-    - done
+
+- name: load current .bashrc to var
+  shell: cat "{{ UserHome }}/.bashrc"
+  register: currentBashrc
+  changed_when: false
+
+- name: extend current .bashrc
+  template:
+    src=newBashrc.j2 
+    dest="{{ UserHome }}/.bashrc.bak"
+    mode=0644
+  when: not currentBashrc.stdout | search("AnsibleCopyToken") #"
+
 
