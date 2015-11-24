@@ -1,0 +1,20 @@
+---
+
+- name: Drop all current rules
+  command: iptables -F
+
+- name: Allow request from different ports
+  command: iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport {{item}} -j ACCEPT
+  with_items:
+   - 22
+   - 80
+   - 81
+   - 443
+   - 8088
+   - 8983
+   - 8985
+   - 27017
+   - 28017
+
+- name: Save iptables rules
+  command: service iptables save
