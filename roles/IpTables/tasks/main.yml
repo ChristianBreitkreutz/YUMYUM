@@ -1,9 +1,11 @@
 ---
 
 - name: Drop all current rules
+  sudo: yes
   command: iptables -F
 
 - name: Allow request from different ports
+  sudo: yes
   command: iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport {{item}} -j ACCEPT
   with_items:
    - 22
@@ -17,4 +19,5 @@
    - 28017
 
 - name: Save iptables rules
+  sudo: yes
   command: service iptables save
