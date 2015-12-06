@@ -3,11 +3,11 @@
 - hosts: local
   remote_user: root
   roles:
-    #- common
+    - common
     - eclipse
-    #- bashrc
-    #- git
-    #- IpTables
+    - bashrc
+    - git
+    - IpTables
     #- grafics
 
   vars_prompt:
