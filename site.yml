@@ -3,14 +3,15 @@
 - hosts: local
   remote_user: root
   roles:
-    - common
-    - bashrc
-    - git
-    - IpTables
-    - grafics
+    #- common
+    - eclipse
+    #- bashrc
+    #- git
+    #- IpTables
+    #- grafics
 
   vars_prompt:
     - name: "gitHubPassword"
-      prompt: "enter git hub password"
+      prompt: "git-hub password"
       private: yes
 
