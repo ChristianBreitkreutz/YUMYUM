@@ -1,3 +1,4 @@
+---
 # prepare and set default for user and root
 - include: bashrcSetUp.yml UserHome="{{ ansible_env['HOME'] }}"
 - include: bashrcSetUp.yml UserHome="/root"

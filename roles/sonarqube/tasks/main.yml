@@ -1,32 +1,5 @@
 ---
-- name: install mysql-server
-  sudo: yes
-  yum:
-    name={{ item }}
-  with_items:
-    - mysql-server
-    - MySQL-python
-
-- name: start mysql-server
-  sudo: yes
-  command: "/sbin/service mysqld start"
-
-- name: create sonar database
-  mysql_db:
-    name: sonar
-    encoding: utf8
-    login_user: root
-    login_password: ""
-    state: present
-
-- name: create sonar user
-  mysql_user:
-    name: "sonar"
-    password: "sonar" 
-    priv: sonar.*:ALL
-    state: present
-    login_user: root
-    login_password: ""
+- include: mysqlSetup.yml
 
 - name: create sonarqube folder
   file:
@@ -34,48 +7,5 @@
     state: directory
     mode: 0755
 
-- name: download sonarqube
-  get_url:
-    url: "https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-4.5.6.zip"
-    dest: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube.zip"
-    mode: 0400
-
-- name: unzip sonarqube
-  unarchive:
-    src: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube.zip"
-    dest: "{{ ansible_env['HOME'] }}/sonarqube"
-    mode: 0755
-
-- name: create sonar folder in opt
-  sudo: yes
-  file:
-    path: "/opt/sonar"
-    state: directory
-    mode: 0755
-
-- name: precheck if folder already exists
-  stat: path=/opt/sonar/sonarqube-4.5.6 
-  register: sym
-
-- name: move sonarqube to opt 
-  sudo: yes
-  command: mv "{{ ansible_env['HOME'] }}/sonarqube/sonarqube-4.5.6" "/opt/sonar"
-  when: sym.stat.isdir is not defined
-
-- name: download sonarqube runner
-  get_url:
-    url: "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/sonar-runner-dist-2.4.zip"
-    dest: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube_runner.zip"
-    mode: 0400
-
-- name: unzip sonarqube runner
-  unarchive:
-    src: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube_runner.zip"
-    dest: "{{ ansible_env['HOME'] }}/sonarqube"
-    mode: 0755
-
-- name: put shortcut in bash
-  template:
-    src: sonarqube.sh.j2 
-    dest: "{{ ansible_env['HOME'] }}/.bashloader.d/sonarqube.sh"
-    mode: 0644
+- include: sonarqube.yml
+- include: sonarqube-runner.yml
