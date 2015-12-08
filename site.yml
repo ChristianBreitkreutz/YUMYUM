@@ -3,12 +3,12 @@
 - hosts: local
   remote_user: root
   roles:
-    - common
-    - eclipse
-    - bashrc
-    - git
-    - IpTables
-    - grafics
+    #- common
+    #- eclipse
+    #- bashrc
+    #- git
+    #- IpTables
+    #- grafics
     - sonarqube
 
   vars_prompt:
