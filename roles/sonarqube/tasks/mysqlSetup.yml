@@ -10,6 +10,7 @@
 - name: start mysql-server
   sudo: yes
   command: "/sbin/service mysqld start"
+  changed_when: false
 
 - name: create sonar database
   mysql_db:

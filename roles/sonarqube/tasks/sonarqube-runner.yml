@@ -10,6 +10,7 @@
     src: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube_runner.zip"
     dest: "{{ ansible_env['HOME'] }}/sonarqube"
     mode: 0755
+  changed_when: false
 
 - name: put shortcut in bash
   template:

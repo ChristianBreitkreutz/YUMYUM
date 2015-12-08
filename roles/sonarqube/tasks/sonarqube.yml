@@ -10,6 +10,7 @@
     src: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube.zip"
     dest: "{{ ansible_env['HOME'] }}/sonarqube"
     mode: 0755
+  changed_when: false
 
 - name: create sonar folder in opt
   sudo: yes
@@ -19,7 +20,7 @@
     mode: 0755
 
 - name: precheck if folder already exists
-  stat: path=/opt/sonar/sonarqube-4.5.6 
+  stat: path=/opt/sonar/sonarqube-4.5.6
   register: sonarqubeStat
 
 - name: move sonarqube to opt 
