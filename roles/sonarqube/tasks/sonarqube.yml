@@ -27,3 +27,20 @@
   sudo: yes
   command: mv "{{ ansible_env['HOME'] }}/sonarqube/sonarqube-4.5.6" "/opt/sonar"
   when: sonarqubeStat.stat.isdir is not defined
+  
+# better with replace?
+- name: setup sonar cube conf sonar.properties
+  sudo: yes
+  lineinfile:
+    dest: /opt/sonar/sonarqube-4.5.6/conf/sonar.properties
+    state: present
+    backup: yes
+    regexp: '^#{{ item }}$'
+    line: "{{ item }}"
+  with_items: 
+    - "sonar.jdbc.username=sonar"
+    - "sonar.jdbc.password=sonar"
+    - "sonar.jdbc.url=jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
+    - "sonar.web.host=127.0.0.1"
+    - "sonar.web.context=/sonar"
+    - "sonar.web.port=9000"
