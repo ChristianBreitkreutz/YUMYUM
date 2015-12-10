@@ -9,3 +9,4 @@
 
 - include: sonarqube.yml
 - include: sonarqube-runner.yml
+- include: sonarqube_as_service.yml
