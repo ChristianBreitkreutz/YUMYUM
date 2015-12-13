@@ -1,0 +1,40 @@
+---
+
+- name: precheck if tar.gz already exists
+  sudo: yes
+  stat: path=/opt/jdk-8u66-linux-i586.tar.gz
+  register: java8TarGz
+
+- name: wget java8 tar.gz
+  sudo: yes
+  command: "wget --no-cookies --no-check-certificate --header 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie' 'http://download.oracle.com/otn-pub/java/jdk/8u66-b17/jdk-8u66-linux-i586.tar.gz' -P /opt"
+  when: java8TarGz.stat.isdir is not defined
+
+- name: precheck if folder already exists
+  sudo: yes
+  stat: path=/opt/jdk1.8.0_66
+  register: JdkFolder
+
+- name: unzip java8
+  sudo: yes
+  unarchive:
+    src: "/opt/jdk-8u66-linux-i586.tar.gz"
+    dest: "/opt"
+    mode: 0755
+  when: java8TarGz.stat.isdir is not defined
+
+- name: install java with alternatives
+  sudo: yes
+  command: "alternatives --install /usr/bin/{{ item }} {{ item }} /opt/jdk1.8.0_45/bin/{{ item }} 2"
+  with_items:
+    #- java
+    - jar
+    #- javac
+
+#- name: set java with alternatives
+#  sudo: yes
+#  command: "alternatives --set {{ item }} /opt/jdk1.8.0_45/bin/{{ item }}"
+#  with_items:
+#    #- java
+#    - jar
+#    #- javac
