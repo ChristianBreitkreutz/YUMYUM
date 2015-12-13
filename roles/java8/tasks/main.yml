@@ -1,40 +1,27 @@
 ---
+- name: create java8 folder in home
+  sudo: yes
+  file:
+    path: "{{ ansible_env['HOME'] }}/java8"
+    state: directory
+    mode: 0755
 
 - name: precheck if tar.gz already exists
   sudo: yes
-  stat: path=/opt/jdk-8u66-linux-i586.tar.gz
+  stat: "path={{ ansible_env['HOME'] }}/java8/{{ RpmName }}.rpm"
   register: java8TarGz
-
+#http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jre-8u65-linux-x64.rpm
+#http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm
 - name: wget java8 tar.gz
   sudo: yes
-  command: "wget --no-cookies --no-check-certificate --header 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie' 'http://download.oracle.com/otn-pub/java/jdk/8u66-b17/jdk-8u66-linux-i586.tar.gz' -P /opt"
+  command: "wget --no-cookies --no-check-certificate --header 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie' 'http://download.oracle.com/otn-pub/java/jdk/{{ BuildVersion }}/{{ RpmName }}.rpm' -P {{ ansible_env['HOME'] }}/java8"
   when: java8TarGz.stat.isdir is not defined
 
-- name: precheck if folder already exists
+- name: install java {{ RpmName }}.rpm
   sudo: yes
-  stat: path=/opt/jdk1.8.0_66
-  register: JdkFolder
+  command: "yum localinstall {{ RpmName }}.rpm"
 
-- name: unzip java8
-  sudo: yes
-  unarchive:
-    src: "/opt/jdk-8u66-linux-i586.tar.gz"
-    dest: "/opt"
-    mode: 0755
-  when: java8TarGz.stat.isdir is not defined
-
-- name: install java with alternatives
-  sudo: yes
-  command: "alternatives --install /usr/bin/{{ item }} {{ item }} /opt/jdk1.8.0_45/bin/{{ item }} 2"
-  with_items:
-    #- java
-    - jar
-    #- javac
-
-#- name: set java with alternatives
+#- name: set latest java version in alternatives
 #  sudo: yes
-#  command: "alternatives --set {{ item }} /opt/jdk1.8.0_45/bin/{{ item }}"
-#  with_items:
-#    #- java
-#    - jar
-#    #- javac
+#  command: "alternatives --set java /usr/java/latest/jre/bin/java"
+# alternatives --config
