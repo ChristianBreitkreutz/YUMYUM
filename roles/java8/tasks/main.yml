@@ -25,3 +25,10 @@
 #  sudo: yes
 #  command: "alternatives --set java /usr/java/latest/jre/bin/java"
 # alternatives --config
+
+- name: put shortcut in bash
+  sudo: yes
+  template:
+    src: java.sh.j2 
+    dest: "{{ ansible_env['HOME'] }}/.bashloader.d/java.sh"
+    mode: 0644
