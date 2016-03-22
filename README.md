@@ -17,8 +17,13 @@ it will add the user to the wheel group and install ansible
 ## trigger install
   - <pre><code>ansible-playbook -i inventory.ini site.yml --ask-sudo-pass</code></pre>
   - <pre><code>ansible-playbook -i inventory.ini site.yml --tags "bashrc" --ask-sudo-pass</code></pre>
+
 # commands
+
+description of some commands
+
 ## ls
+
 |comand| actual command  | description |
 |---|---|---|
 | ls | ls --color=auto | colorized ls |
@@ -29,8 +34,10 @@ it will add the user to the wheel group and install ansible
 
 
 ## cd
+
 |comand| actual command  | description |
 |---|---|---|
+| cd.. | cd .. | allow common typo |
 | .. | cd .. | one level up |
 | .2 | cd ../.. | two levels up |
 | .3  | cd ../../.. | 3 levels up |

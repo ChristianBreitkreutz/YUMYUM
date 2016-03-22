@@ -10,6 +10,7 @@ alias la='ls -A'
 alias l.='ls -d .* --color=auto'
 
 # cd
+alias cd..='cd ..'
 alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
