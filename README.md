@@ -37,6 +37,7 @@ description of some commands
 
 |comand| actual command  | description |
 |---|---|---|
+| cd.. | cd .. | allow common typo |
 | .. | cd .. | one level up |
 | .2 | cd ../.. | two levels up |
 | .3  | cd ../../.. | 3 levels up |
