@@ -17,6 +17,7 @@ it will add the user to the wheel group and install ansible
 ## trigger install
   - <pre><code>ansible-playbook -i inventory.ini site.yml --ask-sudo-pass</code></pre>
   - <pre><code>ansible-playbook -i inventory.ini site.yml --tags "bashrc" --ask-sudo-pass</code></pre>
+
 # commands
 
 description of some commands
