@@ -6,6 +6,7 @@
     - common
     - bashrc
     - git
+    - IpTables
     - grafics
 
   vars_prompt:

@@ -2,6 +2,9 @@
 
 - name: Drop all current rules
   command: iptables -F
+  tags:
+    - iptables
+    - reset
 
 - name: Allow request from different ports
   command: iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport {{item}} -j ACCEPT
@@ -15,6 +18,25 @@
    - 8985
    - 27017
    - 28017
+  tags:
+    - iptables
 
 - name: Save iptables rules
-  command: service iptables save
+  template:
+    src=bashrc.sh.j2 
+    dest={{ ansible_env['HOME'] }}/.bashloader.d/ipTables.sh
+    mode=0644
+  tags:
+    - iptables
+    - bashrc
+
+- name: Save iptables rules (root)
+  template:
+    src=bashrc.sh.j2 
+    dest=/root/.bashloader.d/ipTables.sh
+    mode=0644
+  sudo: yes
+  tags:
+    - iptables
+    - bashrc
+    - rootuser
