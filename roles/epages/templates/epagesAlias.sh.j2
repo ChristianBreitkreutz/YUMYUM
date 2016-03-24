@@ -1,5 +1,16 @@
-alias taileperror="tail -f -n50 $EPAGES_LOG/error.log"
-alias tailepdebug="tail -f -n50 $EPAGES_LOG/debug.log"
-alias tailepcommunication="tail -f -n50 $EPAGES_LOG/communication.log"
+alias tailerror="tail -f -n50 $EPAGES_LOG/error.log"
+alias caterror="cat $EPAGES_LOG/error.log"
+alias deleteerror="rm -f $EPAGES_LOG/error.log"
+
+alias taildebug="tail -f -n50 $EPAGES_LOG/debug.log"
+alias catdebug="cat $EPAGES_LOG/debug.log"
+alias deletedebug="rm -f $EPAGES_LOG/debug.log"
+
+alias tailcommunication="tail -f -n50 $EPAGES_LOG/communication.log"
+alias catcommunication="cat $EPAGES_LOG/communication.log"
+alias deletecommunication="rm -f $EPAGES_LOG/communication.log"
+
+alias deletelogs="rm -rf $EPAGES_LOG/*"
+
 alias restartep6="service epages6 start"
 alias stopepj="service epagesj stop"
