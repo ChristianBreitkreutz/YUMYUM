@@ -69,3 +69,19 @@ description of some commands
 | ping | ping -c 3 | pings only 3 times |
 | pingg | ping -c 1 www.google.com | one ping against google |
 
+## epages
+|comand| actual command  | description |
+|---|---|---|
+| tailerror | tail -f -n50 $EPAGES_LOG/error.log | tail epages error log |
+| caterror | cat $EPAGES_LOG/error.log | cat epages error log |
+| deleteerror | rm -f $EPAGES_LOG/error.log | delete epages error log |
+| taildebug | tail -f -n50 $EPAGES_LOG/debug.log | tail epages debug log |
+| catdebug | cat $EPAGES_LOG/debug.log | cat epages debug log |
+| deletedebug | rm -f $EPAGES_LOG/debug.log | delete epages debug log |
+| tailcommunication | tail -f -n50 $EPAGES_LOG/communication.log | tail epages communication log |
+| catcommunication | cat $EPAGES_LOG/communication.log | cat epages communication log |
+| deletecommunication | rm -f $EPAGES_LOG/communication.log | delete epages communication log |
+| deletelogs | rm -rf $EPAGES_LOG/* | deletes all logs |
+| restartep6 | service epages6 start | start/restart epages |
+| stopepj | service epagesj stop | stop epages j |
+
