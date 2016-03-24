@@ -8,18 +8,4 @@
   sudo: yes
   tags:
     - bashrc
-
-- name: put root only settings
-  template:
-    src=root.sh.j2 
-    dest=/root/.bashloader.d/root.sh
-    mode=0644
-  sudo: yes
-  tags:
-    - bashrc
-
-- name: load new .bashrc
-  shell: "source $HOME/.bashrc"
-  changed_when: false
-  tags:
-    - bashrc
+    - sudotask

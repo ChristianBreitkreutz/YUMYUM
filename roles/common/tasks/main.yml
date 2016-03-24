@@ -1,3 +1,4 @@
+---
 - name: install commons
   sudo: yes
   yum:
@@ -8,3 +9,7 @@
     - vim
     - dos2unix
     - tree
+  tags:
+    - commons
+    - install
+    - sudotask

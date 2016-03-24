@@ -1,0 +1,22 @@
+---
+- name: set epages environment vars
+  template:
+    src=epagesEnvironment.sh.j2
+    dest=/root/.bashloader.d/epagesEnvironment.sh
+    mode=0644
+  sudo: yes
+  tags:
+    - epages
+    - bashrc
+    - rootuser
+
+- name: add extra aliases
+  template:
+    src=epagesAlias.sh.j2
+    dest=/root/.bashloader.d/epagesAlias.sh
+    mode=0644
+  sudo: yes
+  tags:
+    - epages
+    - bashrc
+    - rootuser

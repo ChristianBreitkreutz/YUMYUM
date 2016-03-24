@@ -1,3 +1,4 @@
+---
 - name: install grafics
   sudo: yes
   yum:
@@ -5,3 +6,7 @@
   with_items:
     - inkscape
     - gimp
+  tags:
+    - grafics
+    - install
+    - sudotask
