@@ -10,6 +10,7 @@ it will add the user to the wheel group and install ansible
 ### hint
   - In centos 6 the wheel group is not activad so use: `visudo` and uncomment the %wheel role
   - You have to re-login the user
+
 ## fill in your data in
   - group_vars/all
     - git.yml
