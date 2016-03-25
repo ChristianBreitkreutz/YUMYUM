@@ -69,6 +69,19 @@ description of some commands
 | ping | ping -c 3 | pings only 3 times |
 | pingg | ping -c 1 www.google.com | one ping against google (face it, this is what you ping most of the time!)|
 
+## git
+|command| actual command  | description |
+|---|---|---|
+| gstatus | git status | git status |
+| gcommit | git add -A && git commit | add all files and commit |
+| grebase | git pull --rebase --prune | git pull with rebase |
+| gcheckout | git checkout -b | checkout branch |
+| greset | git reset HEAD --hard | reset hard to HEAD |
+| gltree | git log --graph --oneline --decorate --all | list commits as tree |
+| glfiles | git log --graph --oneline --decorate --all --name-status | list commit with changed file names |
+| gl | git log --oneline | list commits in oneline mode |
+| gpush | git push | git push |
+
 ## epages
 ### logs
 |command| actual command  | description |
