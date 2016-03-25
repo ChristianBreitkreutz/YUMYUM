@@ -24,7 +24,7 @@ description of some commands
 
 ## ls
 
-|comand| actual command  | description |
+|command| actual command  | description |
 |---|---|---|
 | ls | ls --color=auto | colorized ls |
 | ll | ls -l | long listing format |
@@ -35,7 +35,7 @@ description of some commands
 
 ## cd
 
-|comand| actual command  | description |
+|command| actual command  | description |
 |---|---|---|
 | cd.. | cd .. | allow common typo |
 | .. | cd .. | one level up |
@@ -49,10 +49,9 @@ description of some commands
 | .r   | cd /root | got to root |
 | .h   | cd /home | got to home |
 | .d   | cd /home/$user/Desktop | got to Desktop of current user |
-| .s   | cd /home/$user/Schreibtisch | got to Schreibtisch of current user (german is so cool ;-)) |
 
 ## iptables
-|comand| actual command  | description |
+|command| actual command  | description |
 |---|---|---|
 | ipt | sudo iptables | shortcut for iptables |
 | iptlist | sudo iptables -L -n -v --line-numbers | show ports with Numeric output, verbose and line numbers to the beginning of each rule  |
@@ -62,15 +61,16 @@ description of some commands
 | firewall | iptlist | other alias for iptlist |
 
 ## rests
-|comand| actual command  | description |
+|command| actual command  | description |
 |---|---|---|
 | tailf | tail -f -n50 | tail with output appended data as the file grows and the last 50 lines |
 | c | clear | shortcut for clear |
 | ping | ping -c 3 | pings only 3 times |
-| pingg | ping -c 1 www.google.com | one ping against google |
+| pingg | ping -c 1 www.google.com | one ping against google (face it, this is what you ping most of the time!)|
 
 ## epages
-|comand| actual command  | description |
+### logs
+|command| actual command  | description |
 |---|---|---|
 | tailerror | tail -f -n50 $EPAGES_LOG/error.log | tail epages error log |
 | caterror | cat $EPAGES_LOG/error.log | cat epages error log |
@@ -82,6 +82,17 @@ description of some commands
 | catcommunication | cat $EPAGES_LOG/communication.log | cat epages communication log |
 | deletecommunication | rm -f $EPAGES_LOG/communication.log | delete epages communication log |
 | deletelogs | rm -rf $EPAGES_LOG/* | deletes all logs |
-| restartep6 | service epages6 start | start/restart epages |
-| stopepj | service epagesj stop | stop epages j |
-
+### services
+|command| actual command  | description |
+|---|---|---|
+| ep6start | service epages6 start | start epages6 |
+| ep6restart | service epages6 start_service | restart epages6 application server |
+| ep6stop | service epages6 stop | stop epages6 |
+| epjstatus | service epagesj status | status of epagesj |
+| epjstart | service epagesj start | start epagesj |
+| epjrestart | service epagesj restart | restart epagesj |
+| epjstop | service epagesj stop | stop epagesj |
+### rests
+|command| actual command  | description |
+|---|---|---|
+| cdcartridges | cd $EPAGES_CARTRIDGES/DE_EPAGES | goto DE_EPAGES folder |

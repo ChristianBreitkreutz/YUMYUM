@@ -22,9 +22,11 @@ alias .6='cd ../../../../../..'
 
 alias .r='cd /root'
 alias .h='cd /home'
-user="$USER"
-alias .d='cd /home/$user/Desktop'
-alias .s='cd /home/$user/Schreibtisch'
+if [ -d "/home/$USER/Schreibtisch" ]; then
+	alias .d="cd /home/$USER/Schreibtisch"
+else
+	alias .d="cd /home/$USER/Desktop"
+fi
 
 
 # rests
