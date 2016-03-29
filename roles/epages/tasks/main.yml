@@ -20,3 +20,26 @@
     - epages
     - bashrc
     - rootuser
+
+- name: add ssh shortcuts (root)
+  template:
+    src=epagesVmSshAlias.sh.j2
+    dest=/root/.bashloader.d/epagesVmSshAlias.sh
+    mode=0644
+  sudo: yes
+  tags:
+    - ssh
+    - epages
+    - bashrc
+    - rootuser
+
+- name: add ssh shortcuts
+  template:
+    src=epagesVmSshAlias.sh.j2
+    dest={{ ansible_env['HOME'] }}/.bashloader.d/epagesVmSshAlias.sh
+    mode=0644
+  tags:
+    - ssh
+    - epages
+    - bashrc
+    - rootuser
