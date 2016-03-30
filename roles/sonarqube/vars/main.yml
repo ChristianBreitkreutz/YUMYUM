@@ -1,0 +1,8 @@
+---
+SonarqubeVersion: "sonarqube-5.2"
+JdbUsername: "sonar"
+JdbPasswort: "sonar"
+UrlHost: "localhost"
+UrlPort: "9000"
+UrlContext: "sonar"
+

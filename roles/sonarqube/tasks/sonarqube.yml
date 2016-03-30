@@ -1,0 +1,58 @@
+---
+- name: download sonarqube
+  get_url:
+    url: "https://sonarsource.bintray.com/Distribution/sonarqube/{{ SonarqubeVersion }}.zip"
+    dest: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube.zip"
+    mode: 0400
+  tags:
+    - sonarqube
+
+- name: unzip sonarqube
+  unarchive:
+    src: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube.zip"
+    dest: "{{ ansible_env['HOME'] }}/sonarqube"
+    mode: 0755
+  changed_when: false
+  tags:
+    - sonarqube
+
+- name: create sonar folder in opt
+  sudo: yes
+  file:
+    path: "/opt/sonar"
+    state: directory
+    mode: 0755
+  tags:
+    - sonarqube
+    - sudotask
+
+- name: precheck if folder already exists
+  stat: "path=/opt/sonar/{{ SonarqubeVersion }}"
+  register: sonarqubeStat
+  tags:
+    - sonarqube
+
+- name: move sonarqube to opt 
+  sudo: yes
+  command: mv "{{ ansible_env['HOME'] }}/sonarqube/{{ SonarqubeVersion }}" "/opt/sonar"
+  when: sonarqubeStat.stat.isdir is not defined
+  tags:
+    - sonarqube
+    - sudotask
+
+- name: set sonar properties
+  sudo: yes
+  replace:
+    dest: "/opt/sonar/{{ SonarqubeVersion }}/conf/sonar.properties"
+    regexp: ^#{{ item.key }}.*
+    replace: "{{ item.key }}={{ item.value }}"
+  with_items:
+    - {key: "sonar.jdbc.username", value: "{{ JdbUsername }}"}
+    - {key: "sonar.jdbc.password", value: "{{ JdbPasswort }}"}
+    - {key: "sonar.jdbc.url", value: "jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"}
+    - {key: "sonar.web.host", value: "{{ UrlHost }}"}
+    - {key: "sonar.web.port", value: "{{ UrlPort }}"}
+    - {key: "sonar.web.context", value: "/{{ UrlContext }}"}
+  tags:
+    - sonarqube
+    - sudotask

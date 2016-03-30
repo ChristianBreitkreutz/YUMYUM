@@ -1,0 +1,45 @@
+---
+- name: download sonarqube runner
+  get_url:
+    url: "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.4/sonar-runner-dist-2.4.zip"
+    dest: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube_runner.zip"
+    mode: 0400
+    tags:
+    - sonarqube
+
+- name: unzip sonarqube runner
+  unarchive:
+    src: "{{ ansible_env['HOME'] }}/sonarqube/sonarqube_runner.zip"
+    dest: "{{ ansible_env['HOME'] }}/sonarqube"
+    mode: 0755
+  changed_when: false
+    tags:
+    - sonarqube
+
+- name: put shortcut in bash
+  template:
+    src: sonarqube.sh.j2 
+    dest: "{{ ansible_env['HOME'] }}/.bashloader.d/sonarqube.sh"
+    mode: 0644
+    tags:
+    - sonarqube
+
+- name: set sonar runner properties
+  replace:
+    dest: "{{ ansible_env['HOME'] }}/sonarqube/sonar-runner-2.4/conf/sonar-runner.properties"
+    regexp: ^#{{ item.key }}.*
+    replace: "{{ item.key }}={{ item.value }}"
+  with_items:
+    - {key: "sonar.jdbc.username", value: "{{ JdbUsername }}"}
+    - {key: "sonar.jdbc.password", value: "{{ JdbPasswort }}"}
+    - {key: "sonar.host.url", value: "http://{{ UrlHost }}:{{ UrlPort }}/{{ UrlContext }}"}
+    tags:
+    - sonarqube
+
+- name: set sonar runner jdbc url properties
+  replace:
+    dest: "{{ ansible_env['HOME'] }}/sonarqube/sonar-runner-2.4/conf/sonar-runner.properties"
+    regexp: ^#----- Microsoft SQLServer
+    replace: "#----- Microsoft SQLServer replace token: \nsonar.jdbc.url=jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8"
+    tags:
+    - sonarqube

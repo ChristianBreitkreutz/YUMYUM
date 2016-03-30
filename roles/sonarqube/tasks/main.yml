@@ -1,0 +1,14 @@
+---
+- include: mysqlSetup.yml
+
+- name: create sonarqube folder
+  file:
+    path: "{{ ansible_env['HOME'] }}/sonarqube"
+    state: directory
+    mode: 0755
+  tags:
+    - sonarqube
+
+- include: sonarqube.yml
+- include: sonarqube-runner.yml
+- include: sonarqube_as_service.yml

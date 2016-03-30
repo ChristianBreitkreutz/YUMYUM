@@ -1,0 +1,32 @@
+---
+- name: start mysql-server
+  sudo: yes
+  command: "/sbin/service mysqld start"
+  changed_when: false
+  tags:
+    - sonarqube
+    - mysqlsetup
+    - sudotask
+
+- name: create sonar database
+  mysql_db:
+    name: sonar
+    encoding: utf8
+    login_user: root
+    login_password: ""
+    state: present
+  tags:
+    - sonarqube
+    - mysqlsetup
+
+- name: create sonar user
+  mysql_user:
+    name: "sonar"
+    password: "sonar" 
+    priv: sonar.*:ALL
+    login_user: root
+    login_password: ""
+    state: present
+  tags:
+    - sonarqube
+    - mysqlsetup

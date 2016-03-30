@@ -1,0 +1,45 @@
+---
+- name: precheck if sonar.sh already exists
+  stat: path=/etc/init.d/sonar
+  register: sonarSHStat
+  tags:
+    - sonarqube
+
+- name: copy service file
+  sudo: yes
+  copy:
+    src: "/opt/sonar/{{ SonarqubeVersion }}/bin/linux-x86-64/sonar.sh"
+    dest: /etc/init.d/sonar
+    mode: 0775
+  when: not sonarSHStat.stat.exists
+  tags:
+    - sonarqube
+    - sudotask
+
+- name: write new sonar.sh variables
+  sudo: yes
+  lineinfile:
+    state: present
+    insertafter: '# Default values for the Application variables, below.'
+    dest: /etc/init.d/sonar
+    line: "{{ item.key }}={{ item.value }}"
+  with_items:
+    - {key: "PLATFORM", value: '"linux-x86-64"'}
+    - {key: "SONAR_HOME", value: '"/opt/sonar/{{ SonarqubeVersion }}"'}
+    tags:
+    - sonarqube
+    - sudotask
+
+- name: change sonar.sh variables
+  sudo: yes
+  replace:
+    dest: /etc/init.d/sonar
+    regexp: ^{{ item.key }}.*
+    replace: "{{ item.key }}={{ item.value }}"
+  with_items:
+    - {key: "WRAPPER_CMD", value: '"${SONAR_HOME}/bin/${PLATFORM}/wrapper"'}
+    - {key: "WRAPPER_CONF", value: '"${SONAR_HOME}/conf/wrapper.conf"'}
+    - {key: "PIDDIR", value: '"/var/run"'}
+    tags:
+    - sonarqube
+    - sudotask

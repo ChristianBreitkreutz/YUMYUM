@@ -31,6 +31,10 @@ it will add the user to the wheel group and install ansible
 | eclipse |
 | grafics |
 | sudotask |
+| java |
+| mysqlserver |
+| mysqlsetup |
+| sonarqube |
 
 
 # commands
