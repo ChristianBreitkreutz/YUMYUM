@@ -4,7 +4,6 @@
   command: iptables -F
   tags:
     - iptables
-    - reset
 
 - name: Allow request from different ports
   command: iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport {{item}} -j ACCEPT

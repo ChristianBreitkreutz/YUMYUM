@@ -8,7 +8,7 @@
   tags:
     - epages
     - bashrc
-    - rootuser
+    - sudotask
 
 - name: add extra aliases
   template:
@@ -19,7 +19,7 @@
   tags:
     - epages
     - bashrc
-    - rootuser
+    - sudotask
 
 - name: add ssh shortcuts (root)
   template:
@@ -31,7 +31,7 @@
     - ssh
     - epages
     - bashrc
-    - rootuser
+    - sudotask
 
 - name: add ssh shortcuts
   template:
@@ -42,4 +42,4 @@
     - ssh
     - epages
     - bashrc
-    - rootuser
+    - sudotask

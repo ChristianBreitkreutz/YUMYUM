@@ -6,7 +6,6 @@
     name=git
   tags:
     - git
-    - install
     - sudotask
 
 # setup
@@ -14,7 +13,6 @@
   command: touch ~/.gitconfig
   tags:
     - git
-    - setup
 
 - name: load all current settings
   shell: git config --global --list
@@ -22,42 +20,36 @@
   changed_when: false
   tags:
     - git
-    - setup
 
 - name: setup git user
   command: git config --global user.name "{{commiterName}}" #"
   when: not allCurrentSettings.stdout | search("user.name={{commiterName}}") #"
   tags:
     - git
-    - setup
 
 - name: setup git mail
   command: git config --global user.email "{{commiterMail}}" #"
   when: not allCurrentSettings.stdout | search("user.email={{commiterMail}}") #"
   tags:
     - git
-    - setup
 
 - name: set push default to matching
   command: git config --global push.default matching
   when: not allCurrentSettings.stdout | search("push.default=matching") #"
   tags:
     - git
-    - setup
 
 - name: set editor to vim
   command: git config --global core.editor vim
   when: not allCurrentSettings.stdout | search("core.editor=vim") #"
   tags:
     - git
-    - setup
 
 # connect git to github
 - name: create ssh folder
   file: path=~/.ssh state=directory
   tags:
     - git
-    - setup
     - ssh
 
 - stat: path=~/.ssh/github_ansible_generated
@@ -65,7 +57,6 @@
   changed_when: false
   tags:
     - git
-    - setup
     - ssh
 
 - name: Creating pub SSH keys - skip if it's already exist
@@ -73,7 +64,6 @@
   when: not sshkey.stat.exists
   tags:
     - git
-    - setup
     - ssh
 
 - name: copy public key
@@ -82,7 +72,6 @@
   changed_when: false
   tags:
     - git
-    - setup
     - ssh
 
 - name: add public key to github account
@@ -96,8 +85,6 @@
     body_format: json
     status_code: 201, 422 #201 - set key, 422 - key is already in use  tags:
     - git
-    - setup
     - ssh
-    - upload
 
 - include: bashrc.yml

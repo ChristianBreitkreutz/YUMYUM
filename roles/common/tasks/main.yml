@@ -10,6 +10,5 @@
     - dos2unix
     - tree
   tags:
-    - commons
-    - install
+    - common
     - sudotask
