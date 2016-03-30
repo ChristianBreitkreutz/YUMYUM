@@ -97,6 +97,7 @@ description of some commands
 | gpush | git push | git push |
 
 ## epages
+
 ### logs
 |command| actual command  | description |
 |---|---|---|
@@ -110,6 +111,7 @@ description of some commands
 | catcommunication | cat $EPAGES_LOG/communication.log | cat epages communication log |
 | deletecommunication | rm -f $EPAGES_LOG/communication.log | delete epages communication log |
 | deletelogs | rm -rf $EPAGES_LOG/* | deletes all logs |
+
 ### services
 |command| actual command  | description |
 |---|---|---|
@@ -120,6 +122,7 @@ description of some commands
 | epjstart | service epagesj start | start epagesj |
 | epjrestart | service epagesj restart | restart epagesj |
 | epjstop | service epagesj stop | stop epagesj |
+
 ### rests
 |command| actual command  | description |
 |---|---|---|

@@ -1,0 +1,4 @@
+---
+RpmName: "jdk-8u65-linux-x64"
+BuildVersion: "8u65-b17"
+JdkVersion: "jdk1.8.0_65"

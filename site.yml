@@ -10,6 +10,7 @@
     - epages
     - eclipse
     - grafics
+    - java
 
   vars_prompt:
     - name: "gitHubPassword"
