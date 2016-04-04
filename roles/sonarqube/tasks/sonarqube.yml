@@ -24,7 +24,6 @@
     mode: 0755
   tags:
     - sonarqube
-    - sudotask
 
 - name: precheck if folder already exists
   stat: "path=/opt/sonar/{{ SonarqubeVersion }}"
@@ -38,7 +37,6 @@
   when: sonarqubeStat.stat.isdir is not defined
   tags:
     - sonarqube
-    - sudotask
 
 - name: set sonar properties
   sudo: yes
@@ -55,4 +53,3 @@
     - {key: "sonar.web.context", value: "/{{ UrlContext }}"}
   tags:
     - sonarqube
-    - sudotask

@@ -30,7 +30,6 @@ it will add the user to the wheel group and install ansible
 | epages |
 | eclipse |
 | grafics |
-| sudotask |
 | java |
 | mysqlserver |
 | mysqlsetup |

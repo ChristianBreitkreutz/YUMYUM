@@ -6,7 +6,6 @@
     mode: 0755
   tags:
     - eclipse
-    - sudotask
 
 - name: download mars
   get_url:
@@ -15,7 +14,6 @@
     mode: 0400
   tags:
     - eclipse
-    - sudotask
 
 - name: unzip mars
   unarchive:
@@ -24,7 +22,6 @@
     mode: 0755
   tags:
     - eclipse
-    - sudotask
 
 - name: put root eclipse shortcut
   template:
@@ -35,5 +32,3 @@
   tags:
     - eclipse
     - bashrc
-    - sudotask
-

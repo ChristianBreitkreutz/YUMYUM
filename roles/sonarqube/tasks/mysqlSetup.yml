@@ -6,7 +6,6 @@
   tags:
     - sonarqube
     - mysqlsetup
-    - sudotask
 
 - name: create sonar database
   mysql_db:

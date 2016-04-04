@@ -6,7 +6,6 @@
     name=git
   tags:
     - git
-    - sudotask
 
 # setup
 - name: pre create .gitconfig file

@@ -7,7 +7,6 @@
     mode: 0755
   tags:
     - java
-    - sudotask
 
 - name: precheck if tar.gz already exists
   sudo: yes
@@ -15,7 +14,6 @@
   register: javaTarGz
   tags:
     - java
-    - sudotask
 
 - name: wget java tar.gz
   sudo: yes
@@ -23,21 +21,18 @@
   when: javaTarGz.stat.isdir is not defined
   tags:
     - java
-    - sudotask
 
 - name: install java {{ RpmName }}.rpm
   sudo: yes
   command: "yum localinstall {{ ansible_env['HOME'] }}/java/{{ RpmName }}.rpm --assumeyes"
   tags:
     - java
-    - sudotask
 
 - name: set latest java version in alternatives
   sudo: yes
   command: "alternatives --set java /usr/java/{{ JdkVersion }}/jre/bin/java"
   tags:
     - java
-    - sudotask
 
 - name: put shortcut in root bash
   sudo: yes
@@ -48,7 +43,6 @@
   tags:
     - java
     - bashrc
-    - sudotask
 
 - name: put shortcut in bash
   template:

@@ -14,7 +14,6 @@
   when: not sonarSHStat.stat.exists
   tags:
     - sonarqube
-    - sudotask
 
 - name: write new sonar.sh variables
   sudo: yes
@@ -28,7 +27,6 @@
     - {key: "SONAR_HOME", value: '"/opt/sonar/{{ SonarqubeVersion }}"'}
     tags:
     - sonarqube
-    - sudotask
 
 - name: change sonar.sh variables
   sudo: yes
@@ -42,4 +40,3 @@
     - {key: "PIDDIR", value: '"/var/run"'}
     tags:
     - sonarqube
-    - sudotask
