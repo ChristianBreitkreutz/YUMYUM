@@ -9,5 +9,6 @@
     - vim
     - dos2unix
     - tree
+    - autojump
   tags:
     - common

@@ -1,4 +1,6 @@
 ---
+- include: installEpages.yml
+
 - name: set epages environment vars
   template:
     src=epagesEnvironment.sh.j2

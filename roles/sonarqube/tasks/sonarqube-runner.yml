@@ -13,8 +13,8 @@
     dest: "{{ ansible_env['HOME'] }}/sonarqube"
     mode: 0755
   changed_when: false
-    tags:
-    - sonarqube
+  tags:
+  - sonarqube
 
 - name: put shortcut in bash
   template:
@@ -33,7 +33,7 @@
     - {key: "sonar.jdbc.username", value: "{{ JdbUsername }}"}
     - {key: "sonar.jdbc.password", value: "{{ JdbPasswort }}"}
     - {key: "sonar.host.url", value: "http://{{ UrlHost }}:{{ UrlPort }}/{{ UrlContext }}"}
-    tags:
+  tags:
     - sonarqube
 
 - name: set sonar runner jdbc url properties
@@ -41,5 +41,5 @@
     dest: "{{ ansible_env['HOME'] }}/sonarqube/sonar-runner-2.4/conf/sonar-runner.properties"
     regexp: ^#----- Microsoft SQLServer
     replace: "#----- Microsoft SQLServer replace token: \nsonar.jdbc.url=jdbc:mysql://localhost:3306/sonar?useUnicode=true&characterEncoding=utf8"
-    tags:
+  tags:
     - sonarqube

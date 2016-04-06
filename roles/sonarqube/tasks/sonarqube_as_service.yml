@@ -25,8 +25,8 @@
   with_items:
     - {key: "PLATFORM", value: '"linux-x86-64"'}
     - {key: "SONAR_HOME", value: '"/opt/sonar/{{ SonarqubeVersion }}"'}
-    tags:
-    - sonarqube
+  tags:
+  - sonarqube
 
 - name: change sonar.sh variables
   sudo: yes
@@ -38,5 +38,5 @@
     - {key: "WRAPPER_CMD", value: '"${SONAR_HOME}/bin/${PLATFORM}/wrapper"'}
     - {key: "WRAPPER_CONF", value: '"${SONAR_HOME}/conf/wrapper.conf"'}
     - {key: "PIDDIR", value: '"/var/run"'}
-    tags:
-    - sonarqube
+  tags:
+  - sonarqube

@@ -32,7 +32,7 @@ fi
 # rests
 alias tailf='tail -f -n50'
 alias c='clear'
-alias ping='ping -c 5'
+alias ping='ping -c 3'
 alias pingg='ping -c 1 www.google.com'
 alias df='df -H'
 
