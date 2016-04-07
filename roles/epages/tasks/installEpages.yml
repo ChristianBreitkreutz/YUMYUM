@@ -7,12 +7,14 @@
   sudo: yes
   tags:
     - epages
+    - epagesinstall
 
 - name: trigger install script
   script: "/tmp/install-epages.sh --singlehost"
   sudo: yes
   tags:
     - epages
+    - epagesinstall
 
 - name: remove original cartridge folder
   sudo: yes
@@ -21,37 +23,43 @@
     state=absent
   tags:
     - epages
-
-- name: create new cartridge folder
-  sudo: yes
-  file:
-    path="/srv/epages/eproot/Cartridges"
-    state=directory
-  tags:
-    - epages
+    - epagesinstall
+    - epagesreinstall
 
 - name: clone epages cartridge project
   sudo: yes
   git: repo="git@github.com:ePages-de/Cartridges.git"
-    dest=$EPAGES_CARTRIDGES
+    dest="/srv/epages/eproot/Cartridges"
   tags:
     - epages
+    - epagesinstall
+    - epagesreinstall
 
 - name: set file permissions
   sudo: yes
   shell: "service epages6 perm all"
   tags:
     - epages
+    - epagesinstall
+    - epagesreinstall
 
 - name: build main makefile
   sudo: yes
-  command: "{{ ansible_env.PERL }} {{ ansible_env.EPAGES_CARTRIDGES }}/DE_EPAGES/UPS/Makefile.PL"
+  command: "/srv/epages/eproot/Perl/bin/perl Makefile.PL"
+  args:
+    chdir: "/srv/epages/eproot/Cartridges/DE_EPAGES"
   tags:
-    - test
+    - epages
+    - epagesinstall
+    - epagesreinstall
 
 - name: make test
   sudo: yes
-  shell: ". /etc/default/epages6; make reinstall chdir=$EPAGES_CARTRIDGES/DE_EPAGES"
+  command: "make reinstall >> /tmp/instal.log"
+  args:
+    chdir: "/srv/epages/eproot/Cartridges/DE_EPAGES"
   tags:
-    - test2
+    - epages
+    - epagesinstall
+    - epagesreinstall
 
