@@ -30,6 +30,7 @@
   sudo: yes
   git: repo="git@github.com:ePages-de/Cartridges.git"
     dest="/srv/epages/eproot/Cartridges"
+  ignore_errors: yes
   tags:
     - epages
     - epagesinstall
@@ -53,9 +54,9 @@
     - epagesinstall
     - epagesreinstall
 
-- name: make test
+- name: make reinstall
   sudo: yes
-  command: "make reinstall >> /tmp/instal.log"
+  command: "make reinstall >> /tmp/install.log"
   args:
     chdir: "/srv/epages/eproot/Cartridges/DE_EPAGES"
   tags:
