@@ -28,6 +28,8 @@ it will add the user to the wheel group and install ansible
 | ssh |
 | IpTables |
 | epages |
+| epagesinstall |
+| epagesreinstall |
 | eclipse |
 | grafics |
 | java |
@@ -92,7 +94,8 @@ description of some commands
 | gstatus | git status | git status |
 | gcommit | git add -A && git commit | add all files and commit |
 | grebase | git pull --rebase --prune | git pull with rebase |
-| gcheckout | git checkout -b | checkout branch |
+| gnewbranch | git checkout -b | create new branch |
+| gswitchbranch | git checkout | switch branch 
 | greset | git reset HEAD --hard | reset hard to HEAD |
 | gltree | git log --graph --oneline --decorate --all | list commits as tree |
 | glfiles | git log --graph --oneline --decorate --all --name-status | list commit with changed file names |
