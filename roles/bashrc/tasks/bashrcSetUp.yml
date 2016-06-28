@@ -1,3 +1,4 @@
+---
 - name: Creates ~/.bashloader.d directory
   file:
     state: directory

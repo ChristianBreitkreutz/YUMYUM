@@ -1,0 +1,10 @@
+---
+- name: prepare xclip as pbcopy
+  template:
+    src=pbcopy.sh.j2
+    dest="{{ UserHome }}/.bashloader.d/pbcopy.sh"
+    mode=0644
+  sudo: yes
+  tags:
+    - common
+    - test

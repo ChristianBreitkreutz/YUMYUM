@@ -10,5 +10,6 @@
     - dos2unix
     - tree
     - autojump
+    - xclip
   tags:
     - common
