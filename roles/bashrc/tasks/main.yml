@@ -8,3 +8,14 @@
   sudo: yes
   tags:
     - bashrc
+
+- include: pbcopy.yml UserHome="{{ ansible_env['HOME'] }}"
+  tags:
+    - bashrc
+
+- include: pbcopy.yml UserHome="/root"
+  sudo: yes
+  tags:
+    - bashrc
+
+
