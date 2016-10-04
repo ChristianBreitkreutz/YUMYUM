@@ -1,24 +1,24 @@
 ---
-- name: create mars folder
+- name: create neon folder
   file:
-    path: "{{ ansible_env['HOME'] }}/mars"
+    path: "{{ ansible_env['HOME'] }}/neon"
     state: directory
     mode: 0755
   tags:
     - eclipse
 
-- name: download mars
+- name: download neon
   get_url:
-    url: http://eclipse.bluemix.net/packages/mars.1/data/eclipse-java-mars-1-linux-gtk-x86_64.tar.gz
-    dest: "{{ ansible_env['HOME'] }}/mars/mars.tar.gz"
-    mode: 0400
+    url: http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/technology/epp/downloads/release/neon/1/eclipse-java-neon-1-linux-gtk-x86_64.tar.gz
+    dest: "{{ ansible_env['HOME'] }}/neon/neon.tar"
+    mode: 0755
   tags:
     - eclipse
 
-- name: unzip mars
+- name: unzip neon
   unarchive:
-    src: "{{ ansible_env['HOME'] }}/mars/mars.tar.gz"
-    dest: "{{ ansible_env['HOME'] }}/mars"
+    src: "{{ ansible_env['HOME'] }}/neon/neon.tar"
+    dest: "{{ ansible_env['HOME'] }}/neon"
     mode: 0755
   tags:
     - eclipse
@@ -28,7 +28,8 @@
     src: eclipse.sh.j2 
     dest: /root/.bashloader.d/eclipse.sh
     mode: 0644
-  sudo: yes
+  become: true
   tags:
     - eclipse
     - bashrc
+
