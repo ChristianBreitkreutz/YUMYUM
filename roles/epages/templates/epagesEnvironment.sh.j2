@@ -4,3 +4,23 @@ export STORE=Store
 
 export PATH=$PATH:{{ ansible_env['HOME'] }}/eclipse
 
+alias tailerror="tail -f -n50 $EPAGES_LOG/error.log"
+alias caterror="cat $EPAGES_LOG/error.log"
+alias deleteerror="rm -f $EPAGES_LOG/error.log"
+
+alias taildebug="tail -f -n50 $EPAGES_LOG/debug.log"
+alias catdebug="cat $EPAGES_LOG/debug.log"
+alias deletedebug="rm -f $EPAGES_LOG/debug.log"
+
+alias tailcommunication="tail -f -n50 $EPAGES_LOG/communication.log"
+alias catcommunication="cat $EPAGES_LOG/communication.log"
+alias deletecommunication="rm -f $EPAGES_LOG/communication.log"
+
+alias deletelogs="rm -rf $EPAGES_LOG/*"
+
+alias ep6="service epages6"
+alias epj="service epagesj"
+
+alias cdcartridges="cd $EPAGES_CARTRIDGES/DE_EPAGES"
+alias buildmakefile="$PERL Makefile.PL"
+alias makereinstall="cdcartridges;buildmakefile;make reinstall"

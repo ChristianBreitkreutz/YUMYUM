@@ -1,32 +1,21 @@
 ---
-- include: installEpages.yml
 
 - name: set epages environment vars
+  become: true
   template:
     src=epagesEnvironment.sh.j2
     dest=/root/.bashloader.d/epagesEnvironment.sh
     mode=0644
-  sudo: yes
-  tags:
-    - epages
-    - bashrc
-
-- name: add extra aliases
-  template:
-    src=epagesAlias.sh.j2
-    dest=/root/.bashloader.d/epagesAlias.sh
-    mode=0644
-  sudo: yes
   tags:
     - epages
     - bashrc
 
 - name: add ssh shortcuts (root)
+  become: true
   template:
     src=epagesVmSshAlias.sh.j2
     dest=/root/.bashloader.d/epagesVmSshAlias.sh
     mode=0644
-  sudo: yes
   tags:
     - ssh
     - epages
