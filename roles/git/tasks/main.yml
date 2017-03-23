@@ -1,48 +1,44 @@
 ---
-# install git
-- name: install git
-  sudo: yes
-  yum:
-    name=git
-  tags:
-    - git
 
-# setup
-- name: pre create .gitconfig file
-  command: touch ~/.gitconfig
-  tags:
-    - git
+- fail:
+    msg: "Please configure the group_vars/all/git.yml first!"
+  when: not commiterName or not commiterMail or not gitHubUserName or not gitHubPassword
 
-- name: load all current settings
-  shell: git config --global --list
-  register: allCurrentSettings
-  changed_when: false
+- name: setup user name
+  git_config:
+    name: user.name
+    scope: global
+    value: "{{commiterName}}"
   tags:
     - git
+    - ssh
 
-- name: setup git user
-  command: git config --global user.name "{{commiterName}}" #"
-  when: not allCurrentSettings.stdout | search("user.name={{commiterName}}") #"
+- name: setup user email
+  git_config:
+    name: user.email
+    scope: global
+    value: "{{commiterMail}}"
   tags:
     - git
+    - ssh
 
-- name: setup git mail
-  command: git config --global user.email "{{commiterMail}}" #"
-  when: not allCurrentSettings.stdout | search("user.email={{commiterMail}}") #"
+- name: setup push default
+  git_config:
+    name: push.default
+    scope: global
+    value: matching
   tags:
     - git
+    - ssh
 
-- name: set push default to matching
-  command: git config --global push.default matching
-  when: not allCurrentSettings.stdout | search("push.default=matching") #"
+- name: setup core editor
+  git_config:
+    name: core.editor
+    scope: global
+    value: vim
   tags:
     - git
-
-- name: set editor to vim
-  command: git config --global core.editor vim
-  when: not allCurrentSettings.stdout | search("core.editor=vim") #"
-  tags:
-    - git
+    - ssh
 
 # connect git to github
 - name: create ssh folder
