@@ -1,15 +1,25 @@
 ---
-- name: install commons
-  sudo: yes
-  yum:
-    name={{ item }}
-  with_items:
-    - curl
-    - jwhois
-    - vim
-    - dos2unix
-    - tree
-    - autojump
-    - xclip
-  tags:
-    - common
+
+- name: install curl
+  become: true
+  package:
+    name: curl
+    state: latest
+
+- name: install vim
+  become: true
+  package:
+    name: vim
+    state: latest
+
+- name: install dos2unix
+  become: true
+  package:
+    name: dos2unix
+    state: latest
+
+- name: install tree
+  become: true
+  package:
+    name: tree
+    state: latest

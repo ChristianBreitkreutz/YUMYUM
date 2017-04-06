@@ -21,6 +21,6 @@
     src: newBashrc.j2 
     dest: "{{ UserHome }}/.bashrc"
     mode: 0644
-  when: not currentBashrc.stdout | search("AnsibleCopyToken") #"
+  when: not currentBashrc.stdout | search("AnsibleCopyToken")
 
 
