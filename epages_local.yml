@@ -5,4 +5,4 @@
   roles:
     - common
     - bashrc
-    - bashrc_epages
+    - epages

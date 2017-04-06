@@ -1,32 +1,7 @@
 ---
 
-- name: set epages environment vars
-  become: true
-  template:
-    src=epagesEnvironment.sh.j2
-    dest=/root/.bashloader.d/epagesEnvironment.sh
-    mode=0644
-  tags:
-    - epages
-    - bashrc
-
-- name: add ssh shortcuts (root)
-  become: true
-  template:
-    src=epagesVmSshAlias.sh.j2
-    dest=/root/.bashloader.d/epagesVmSshAlias.sh
-    mode=0644
-  tags:
-    - ssh
-    - epages
-    - bashrc
-
 - name: add ssh shortcuts
   template:
-    src=epagesVmSshAlias.sh.j2
-    dest={{ ansible_env['HOME'] }}/.bashloader.d/epagesVmSshAlias.sh
-    mode=0644
-  tags:
-    - ssh
-    - epages
-    - bashrc
+    src: epagesVmSshAlias.sh.j2
+    dest: "{{ ansible_env['HOME'] }}/.bashloader.d/epagesVmSshAlias.sh"
+    mode: 0644

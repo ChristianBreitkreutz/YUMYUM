@@ -1,7 +1,0 @@
----
-
-- name: add ssh shortcuts
-  template:
-    src: epagesVmSshAlias.sh.j2
-    dest: "{{ ansible_env['HOME'] }}/.bashloader.d/epagesVmSshAlias.sh"
-    mode: 0644

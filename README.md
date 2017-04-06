@@ -1,6 +1,6 @@
 # how to install YUMYUM on centos
 ## bash setup
-  <pre><code>ansible-playbook -i inventory.ini bash.yml --ask-sudo-pass</code></pre>
+  <pre><code>ansible-playbook -i inventory.ini epages_local.yml --ask-sudo-pass</code></pre>
 ## call init.sh as root
 it will add the user to the wheel group and install ansible
 `. init.sh <username>`
