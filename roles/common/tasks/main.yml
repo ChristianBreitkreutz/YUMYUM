@@ -23,3 +23,9 @@
   package:
     name: tree
     state: latest
+
+- name: install jq
+  become: true
+  package:
+    name: jq
+    state: latest
