@@ -1,4 +1,5 @@
 # how to install YUMYUM on centos
+[Contribution guidelines for this project](wurst.md)
 ## bash setup
   <pre><code>ansible-playbook -i inventory.ini epages_local.yml --ask-sudo-pass</code></pre>
 ## call init.sh as root
