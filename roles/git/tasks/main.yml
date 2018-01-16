@@ -9,65 +9,48 @@
     name: user.name
     scope: global
     value: "{{commiterName}}"
-  tags:
-    - git
-    - ssh
 
 - name: setup user email
   git_config:
     name: user.email
     scope: global
     value: "{{commiterMail}}"
-  tags:
-    - git
-    - ssh
+
 
 - name: setup push default
   git_config:
     name: push.default
     scope: global
     value: matching
-  tags:
-    - git
-    - ssh
+
 
 - name: setup core editor
   git_config:
     name: core.editor
     scope: global
     value: vim
-  tags:
-    - git
-    - ssh
+
 
 # connect git to github
 - name: create ssh folder
   file: path=~/.ssh state=directory
-  tags:
-    - git
-    - ssh
+
 
 - stat: path=~/.ssh/github_ansible_generated
   register: sshkey
   changed_when: false
-  tags:
-    - git
-    - ssh
+
 
 - name: Creating pub SSH keys - skip if it's already exist
-  command: "ssh-keygen -N '' -f ~/.ssh/github_ansible_generated"
+  command: "ssh-keygen -t rsa -b 4096 -f ~/.ssh/github_ansible_generated"
   when: not sshkey.stat.exists
-  tags:
-    - git
-    - ssh
+
 
 - name: copy public key
   command: "cat ~/.ssh/github_ansible_generated.pub"
   register: publickey
   changed_when: false
-  tags:
-    - git
-    - ssh
+
 
 - name: add public key to github account
   uri:
@@ -78,8 +61,6 @@
     body: "{\"title\":\"ansible_generated_{{ansible_user_id}}@{{ansible_hostname}}\",\"key\":\"{{publickey.stdout}}\", \"_hack\": null}" #_hack it is because of a bug in the uri package
     force_basic_auth: yes
     body_format: json
-    status_code: 201, 422 #201 - set key, 422 - key is already in use  tags:
-    - git
-    - ssh
+    status_code: 201, 422 #201 - set key, 422 - key is already in use
 
 - include: bashrc.yml

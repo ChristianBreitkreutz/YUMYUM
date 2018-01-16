@@ -4,16 +4,11 @@
     src=gitAliases.sh.j2
     dest={{ ansible_env['HOME'] }}/.bashloader.d/gitAliases.sh
     mode=0644
-  tags:
-    - git
-    - bashrc
 
 - name: set git aliases (root)
   template:
     src=gitAliases.sh.j2
     dest=/root/.bashloader.d/gitAliases.sh
     mode=0644
-  sudo: yes
-  tags:
-    - git
-    - bashrc
+  become: true
+

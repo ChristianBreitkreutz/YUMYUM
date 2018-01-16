@@ -5,4 +5,5 @@
   roles:
     - common
     - bashrc
-    - epages
+    - git
+    - grafics
