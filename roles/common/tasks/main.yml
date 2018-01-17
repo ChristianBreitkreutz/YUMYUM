@@ -29,3 +29,9 @@
   package:
     name: jq
     state: latest
+
+- name: install net-tools
+  become: true
+  package:
+    name: net-tools
+    state: latest
