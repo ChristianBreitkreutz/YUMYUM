@@ -1,8 +1,8 @@
 ---
-- name: install grafics
+- name: install tools
   become: true
   package:
     name: "{{ item }}"
   with_items:
-    - inkscape
-    - gimp
+    - octave
+    - lilypond
