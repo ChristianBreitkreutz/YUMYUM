@@ -35,3 +35,27 @@
   package:
     name: net-tools
     state: latest
+
+- name: install sublime ppa
+  become: true
+  apt_repository:
+    repo: "ppa:webupd8team/sublime-text-3"
+
+- name: install sublime
+  become: true
+  package:
+    name: "sublime-text-installer"
+    state: latest
+
+- name: install traceroute
+  become: true
+  package:
+    name: "traceroute"
+    state: latest
+
+- name: install speedtest-cli
+  become: true
+  package:
+    name: "speedtest-cli"
+    state: latest
+
