@@ -1,0 +1,26 @@
+---
+- name: check if already downloaded (delete /opt/Postman to retrigger download)
+  stat:
+    path: /opt/Postman/Postman
+  register: postmanBin
+
+- name: download and unzip postman
+  become: true
+  unarchive:
+    src: https://dl.pstmn.io/download/latest/linux64
+    dest: /opt
+    remote_src: yes
+  when: not postmanBin.stat.exists
+
+- name: link postman
+  become: true
+  file:
+    src: '/opt/Postman/Postman'
+    dest: '/usr/bin/postman'
+    state: link
+
+- name: create destop link
+  template:
+    src: postman.desctop.j2
+    dest: "~/.local/share/applications/postman.desktop"
+    mode: 0777
